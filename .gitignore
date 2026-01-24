@@ -73,6 +73,10 @@ mono_crash.*
 *.unitypackage.meta
 *.app
 
+.vscode/
+
+*.slnx
+
 # Crashlytics generated file
 crashlytics-build.properties
 
