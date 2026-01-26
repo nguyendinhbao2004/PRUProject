@@ -76,6 +76,25 @@ mono_crash.*
 .vscode/
 
 *.slnx
+*.sln.iml
+*.sln.DotSettings
+*.sln.DotSettings.user
+
+# Unity generated solution cache files (hiếm nhưng có)
+*.csproj.meta
+*.sln.meta
+
+# Rider / VS additional cache
+.idea/
+.idea/**
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Unity IDE XML cache (một số máy sinh ra)
+*.xml
 
 # Crashlytics generated file
 crashlytics-build.properties
