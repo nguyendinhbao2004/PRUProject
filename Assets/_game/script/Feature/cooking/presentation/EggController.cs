@@ -1,4 +1,5 @@
 ﻿using Assets._game.script.Feature.cooking.domain.Egg;
+using System;
 using System.Collections;
 using UnityEngine;
 using static CookingEnums;
@@ -18,10 +19,14 @@ namespace Assets._game.script.Feature.cooking.presentation
         // Cần tham chiếu đến Đĩa (Plate) - gán trong Inspector hoặc tìm kiếm
         [SerializeField] private Transform _plateTarget;
 
-        public void Initialize(PanController pan, Transform platePosition)
+        // Callback khi trứng hoàn thành rán
+        private Action _onCookingCompleted;
+
+        public void Initialize(PanController pan, Transform platePosition, Action onCookingCompleted = null)
         {
             _eggEntity = new EggEntity(_config);
             _plateTarget = platePosition;
+            _onCookingCompleted = onCookingCompleted;
 
             // Bắt đầu quy trình ngay khi được sinh ra
             StartCoroutine(CookingProcessRoutine(pan));
@@ -47,6 +52,9 @@ namespace Assets._game.script.Feature.cooking.presentation
             // 4. Đến đĩa -> Hoàn tất
             _eggEntity.ChangeState(EggState.Plated);
             _visuals.UpdateSpriteByState(EggState.Plated);
+
+            // Thông báo đã hoàn thành rán
+            _onCookingCompleted?.Invoke();
 
             // Logic game kết thúc hoặc cộng điểm ở đây...
         }
